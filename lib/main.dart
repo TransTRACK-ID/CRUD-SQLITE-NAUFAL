@@ -1,8 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:crud_final/controller/cubit/cubit.dart';
-import 'package:crud_final/repositories/database_repositories.dart';
-import 'package:crud_final/shared/styles/themes.dart';
-import 'package:crud_final/views/home_screen.dart';
+import 'package:crud_final/repositories/base_repositories.dart';
+import 'package:crud_final/modules/view/themes.dart';
+import 'package:crud_final/models/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';

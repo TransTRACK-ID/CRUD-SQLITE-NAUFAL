@@ -1,12 +1,12 @@
-import 'package:crud_final/controller/cubit/states.dart';
+import 'package:crud_final/modules/top_level_cubit/states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
 
-class TodoCubit extends Cubit<TodoStates> {
-  TodoCubit() : super(InitialTodoState());
+class BaseRepositories extends Cubit<TodoStates> {
+  BaseRepositories() : super(InitialTodoState());
 
-  static TodoCubit get(context) => BlocProvider.of(context);
+  static BaseRepositories get(context) => BlocProvider.of(context);
 
 // SQl Lite
 // Create our database

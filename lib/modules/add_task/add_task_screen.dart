@@ -1,36 +1,33 @@
-import 'package:crud_final/repositories/database_repositories.dart';
-import 'package:crud_final/controller/cubit/states.dart';
+import 'package:crud_final/repositories/base_repositories.dart';
+import 'package:crud_final/modules/top_level_cubit/states.dart';
 import 'package:crud_final/shared/component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class UpdateTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatelessWidget {
 
   TextEditingController titleController = TextEditingController();
   TextEditingController timeController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController descController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  late int id;
-  UpdateTaskScreen({required this.id});
-
+  var _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TodoCubit, TodoStates>(
+    return BlocConsumer<BaseRepositories, TodoStates>(
       listener: (BuildContext context, state) 
       {
-        if(state is SuccessUpdatingDataFromDatabaseState)
+        if(state is InsertingIntoTodoDatabaseState)
         {
           Navigator.pop(context);
         }
       },
       builder: (BuildContext context, Object? state) {
-        var cubit = TodoCubit.get(context);
+        var cubit = BaseRepositories.get(context);
         return Scaffold(
         appBar: AppBar(
-          title: const Text('Update Your Task'),
+          title: const Text('Add Your Task'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -124,14 +121,14 @@ class UpdateTaskScreen extends StatelessWidget {
                     onPressed: () {
                         if(_formKey.currentState!.validate())
                         {
-                          cubit.updateDataIntoDatabase(
+                          cubit.insertToDatabase(
                             title: titleController.text,
                             date: dateController.text,
                             time: timeController.text,
-                            description: descController.text, id: id);
+                            description: descController.text);
                         }
                       },
-                      child: const Text('Update Task'),
+                      child: const Text('Add Task'),
                     )
                   ],
                 ),

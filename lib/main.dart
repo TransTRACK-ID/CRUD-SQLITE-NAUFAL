@@ -1,10 +1,12 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:crud_final/repositories/base_repositories.dart';
 import 'package:crud_final/modules/view/themes.dart';
-import 'package:crud_final/models/home_screen.dart';
+import 'package:crud_final/modules/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
+
+import 'modules/home/home_screen.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => TodoCubit()..createDatabase()),
+        BlocProvider(create: (context) => BaseRepositories()..createDatabase()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

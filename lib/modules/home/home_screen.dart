@@ -1,9 +1,9 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:crud_final/controller/cubit/cubit.dart';
-import 'package:crud_final/controller/cubit/states.dart';
-import 'package:crud_final/repositories/database_repositories.dart';
-import 'package:crud_final/views/add_task_screen.dart';
-import 'package:crud_final/views/update_screen.dart';
+import 'package:crud_final/modules/top_level_cubit/cubit.dart';
+import 'package:crud_final/modules/top_level_cubit/states.dart';
+import 'package:crud_final/repositories/base_repositories.dart';
+import 'package:crud_final/modules/add_task/add_task_screen.dart';
+import 'package:crud_final/modules/update/update_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,10 +12,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TodoCubit, TodoStates>(
+    return BlocConsumer<BaseRepositories, TodoStates>(
       listener: (BuildContext context, state) {},
       builder: (BuildContext context, Object? state) {
-        var cubit = TodoCubit.get(context);
+        var cubit = BaseRepositories.get(context);
         return Scaffold(
           appBar: AppBar(
             title: const Text('MyTasks'),
@@ -33,13 +33,11 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) 
-                                    {
-                                      return UpdateTaskScreen(id: cubit.tasks[index]['id']);
-                                      }));
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return UpdateTaskScreen(
+                                  id: cubit.tasks[index]['id']);
+                            }));
                           },
                           child: Card(
                             child: Padding(
